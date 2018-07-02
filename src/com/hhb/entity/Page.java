@@ -1,9 +1,10 @@
 package com.hhb.entity;
 
+import com.hhb.utils.JSONUtil;
+
 import java.io.Serializable;
 import java.util.List;
 
-import com.hhb.utils.JSONUtil;
 
 /**
  * 分页页面

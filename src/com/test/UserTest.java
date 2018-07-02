@@ -1,5 +1,9 @@
 package com.test;
 
+import com.hhb.dao.CityDao;
+import com.hhb.dao.UserDao;
+import com.hhb.entity.City;
+import com.hhb.entity.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,14 +11,21 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserTest {
+public class UserTest extends BaseTest{
     private UserMapper userMapper;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private CityDao cityDao;
 
     @Before
     public void setUp() throws Exception {
@@ -25,24 +36,19 @@ public class UserTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
-    public void TestMyBatis() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans-test.xml");
-        this.userMapper = (UserMapper) ctx.getBean("userMapper");
-        String userId = "1";
-        User user = this.userMapper.getUser(userId);
-        System.out.println(user.getPassword());
 
+    @Test
+    public void TestMyBatisQuery() {
+        int cityId = 77;
+        City city = cityDao.getCityById(cityId);
+        System.out.println(city);
     }
 
-
     @Test
-    public void TestMyBatisGenerator() {
-        try {
-            generator();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void UserDaoTest() {
+        int userId = 1;
+        User user = userDao.getUserById(userId);
+        System.out.println(user);
     }
 
     public void setUserMapper(UserMapper userMapper) {

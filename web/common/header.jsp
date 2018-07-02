@@ -53,7 +53,7 @@
 							可用数据：用户id：user  邮箱：eamil   电话：phone   -->
 					<c:choose>
 						<c:when test="${empty user}">
-							<a href="${pageContext.request.contextPath }/login.jsp">请登录</a>
+							<a href="${pageContext.request.contextPath }/WEB-INF/pages/login.jsp">请登录</a>
             		 | 		<a
 								href="${pageContext.request.contextPath }/register.jhtml?type=init">免费注册</a>
 						</c:when>

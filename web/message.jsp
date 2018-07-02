@@ -53,7 +53,7 @@
 		%>
 		<%=s %>
 		<br/>
-		<a href="${pageContext.request.contextPath }/login.jsp" style="text-decoration:none">&lt;&lt; 点击此出返回登录页</a>
+		<a href="${pageContext.request.contextPath }/WEB-INF/pages/login.jsp" style="text-decoration:none">&lt;&lt; 点击此出返回登录页</a>
 	</div>
 </body>
 </html>

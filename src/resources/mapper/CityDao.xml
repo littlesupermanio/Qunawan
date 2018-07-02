@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.CityDao">
+
+    <resultMap type="City" id="CityResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <association property="parentCity" resultMap="parenCityResult"/>
+    </resultMap>
+
+    <resultMap type="City" id="parenCityResult">
+        <id property="id" column="pid"/>
+        <result property="name" column="pname"/>
+        <result property="type" column="ptype"/>
+    </resultMap>
+
+    <select id="getCityById" parameterType="int" resultMap="CityResult">
+        select c.id,c.name,c.type,p.id pid,p.name pname,p.type ptype from city c,city p where c.parent_id = p.id and c.id = #{cityId}
+    </select>
+</mapper>

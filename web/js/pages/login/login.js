@@ -22,7 +22,7 @@ $(document).ready(
 			var index = parseInt(Math.random() * (imgArr.length));
 			// 定时更换背景
 			$(".backgrounds").css("backgroundImage",
-					"url(" + imgArr[index] + ")");
+					"url(/" + imgArr[index] + ")");
 			/* 刷新时随机更换页面背景图片 结束  */
 
 			/*  账号、密码、验证码初始状态 开始  */
@@ -113,9 +113,9 @@ function login(formName) {
 		var start = url.lastIndexOf("/");
 		var end = url.indexOf(";");
 		if(end == -1)
-			var newurl = url.replace(url.substring(start),"/login.jhtml");
+			var newurl = url.replace(url.substring(start),"/login");
 		else
-			var newurl = url.replace(url.substring(start,end),"/login.jhtml");
+			var newurl = url.replace(url.substring(start,end),"/login");
 		$("#log_reg_form").attr("action", newurl);
 		window.document.forms[formName].submit();
 	}

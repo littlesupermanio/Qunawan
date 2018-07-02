@@ -112,6 +112,23 @@ public class User implements Serializable {
 		this.city = city;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", phone='" + phone + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", sex=" + sex +
+				", img_path='" + img_path + '\'' +
+				", email='" + email + '\'' +
+				", real_name='" + real_name + '\'' +
+				", birthday=" + birthday +
+				", city=" + city +
+				", Contact=" + Contact +
+				'}';
+	}
+
 	/** PRJ-WTP-HIB-011：获取常用游客列表 添加持久化类属性 2/3【start】**/
 	private List<Contact> Contact;
 	
