@@ -1,0 +1,16 @@
+.idea/*
+out/*
+
+
+#idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
