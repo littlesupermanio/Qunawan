@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.PlaceDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="placeResult" type="Place">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+
+        <association property="city"
+                     column="city"
+                     javaType="City"
+                     select="com.hhb.dao.CityDao.getCityById"/>
+    </resultMap>
+
+    <resultMap id="pagePlaces" type="string">
+        <result property="name" column="name"/>
+    </resultMap>
+
+
+    <select id="getPlaceByName" parameterType="string" resultMap="placeResult">
+        <!-- 具体的sql -->
+        select * from place where name = #{placeName}
+    </select>
+
+    <select id="getPlaceById" parameterType="int" resultMap="placeResult">
+        <!-- 具体的sql -->
+        select * from place where id = #{placeId}
+    </select>
+
+    <select id="getPagePlacesByType" resultMap="pagePlaces">
+        <!-- 具体的sql -->
+        SELECT DISTINCT p.name FROM PlaceOnTrip pt
+        LEFT JOIN Place p ON pt.place = p.id
+        LEFT JOIN Trip t ON pt.trip = t.id
+        WHERE t.type = #{typeId}  ORDER BY p.id LIMIT #{offset},#{limit}
+    </select>
+
+
+</mapper>
