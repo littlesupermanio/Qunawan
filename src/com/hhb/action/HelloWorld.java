@@ -23,7 +23,7 @@ public class HelloWorld {
         ModelAndView mv = new ModelAndView();
         mv.addObject("name", "Hello world again!!!!");
 
-        mv.setViewName("success");
+        mv.setViewName("login");
 
         return mv;
     }
