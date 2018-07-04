@@ -21,10 +21,11 @@ $(document).ready(function() {
  * @returns 地址栏参数值
  */
 function GetQueryString(name) {
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-	var r = window.location.search.substr(1).match(reg);
+	var reg = new RegExp("(\\w+):\\/\\/([^/:]+)(:\\d*)?/trip/(\\d*)*");
+	var r = window.location.href.match(reg);
+	console.log(r)
 	if (r != null)
-		return unescape(r[2]);
+		return unescape(r[4]);
 	return null;
 }
 
@@ -122,25 +123,23 @@ function bad(com_id) {
 function loadComment(trip_id, page) {
 	if (trip_id == null || trip_id == "" || page == "" || page == null)
 		return;
-
 	$
 			.ajax({
 				type : "POST",
 				async : true,
-				url : "tripDetail.jhtml",
+				url : "/trip/"+trip_id + "/comments",
 				data : {
-					id : trip_id,
 					page : page,
-					type : 'comment',
 				},
 				dataType : "json",
 
 				// 成功返回调用的函数
 				success : function(comments) {
+					console.log(comments)
 					var html = '';
 					$
 							.each(
-									comments,
+									comments.data,
 									function(i, com) {
 										var p_score = com.place;
 										var p_string = getStringByScore(p_score);
@@ -180,11 +179,11 @@ function loadComment(trip_id, page) {
 													+ '</div><div class="DB_thumSet DB_thumSetb"><ul class="DB_thumMove">';
 											for (var i = 0; i < com.pictures.length; i++) {
 												html += '<li><a href="'
-														+ getRootPath()
+														// + getRootPath()
 														+ '/image_cache/'
 														+ com.pictures[i].name
 														+ '"><img src="'
-														+ getRootPath()
+														// + getRootPath()
 														+ '/image_cache/'
 														+ com.pictures[i].name
 														+ '" /></a></li>';
@@ -198,9 +197,9 @@ function loadComment(trip_id, page) {
 										html += '<div class="comment"><p><a href="javascript:;" hidefocus="false">'
 												+ com.user.name
 												+ '</a> 对 <span class="com-proTit"> <a href="javascript:;" title="'
-												+ $('.product-name h1').html()
+												+ $('.font_trip_title .cur').html()
 												+ '" hidefocus="false">”'
-												+ $(".product-name h1").html()
+												+ $(".font_trip_title .cur").html()
 												+ '</a></span> ” 发表点评 <em>'
 												+ com.timeStr
 												+ '</em> <a class="com-user-app" href="javascript:;" hidefocus="false"> <i class="iconcom iconcom-mobiles"></i>'

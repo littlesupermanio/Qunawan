@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JSP1.X实现的是TagSupport类中的doEndTag()方法，而JSP2.X只实现SimpleTag接口中唯一的doTag()方法，并且该方法没有返回值。-->
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>end</short-name>
+	<!-- 定义该标签库的URI-->
+	<uri>http://www.oraclecsg.com/own</uri>
+	<!-- 定义第一个标签 -->
+	<tag>
+		<!-- 定义标签名 -->
+		<name>orderOwnTag</name>
+		<!-- 定义标签处理类 -->
+		<tag-class>com.hhb.tag.OrderOwnTag</tag-class>
+		<!-- 定义标签体为空 -->
+		<body-content>empty</body-content>
+		<!-- 设置该标签属性为动态属性 -->
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+</taglib>

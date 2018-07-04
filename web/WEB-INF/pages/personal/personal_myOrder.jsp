@@ -16,13 +16,13 @@
 	<meta charset="UTF-8">
 	<title>个人空间-我的约单</title>
 	<link type="text/css" rel="stylesheet"
-		href="css/personalCss.css" />
+		href="<%=basePath%>/css/personalCss.css" />
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="<%=basePath%>js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_information.js"></script>
+		src="<%=basePath%>js/pages/personal/personal_information.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_order.js"></script>
+		src="<%=basePath%>js/pages/personal/personal_order.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -53,11 +53,11 @@
 	<div class="content_left_two">
 		<ul>
 			<li class="backgroundClass"><a
-				href="${pageContext.request.contextPath }/myorder.jhtml?type=init"><span
+				href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}"><span
 					class="icon  icon_my_re_list "> </span> <span
 					class="position_my_re_list">我的约单</span> </a></li>
 			<li ><a
-				href="${pageContext.request.contextPath }/personalinfo.jhtml?type=init"><span
+				href="${pageContext.request.contextPath }/user/${sessionScope.get("user").id}"><span
 					class="icon  icon_my_re_list  icon_personal"> </span> <span
 					class="position_my_re_list">个人信息</span></a></li>
 			<li ><a
@@ -208,16 +208,16 @@
 					
 					<c:forEach var="i" begin="1" end="${pageCount}">
 						<c:if test="${i==cur}">
-								<a href="myorder.jhtml?type=init&page=${i}" class="pagesel" style="background-color:#DF1A7A;
+								<a href="/orders/user/${sessionScope.get("user").id}?page=${i}" class="pagesel" style="background-color:#DF1A7A;
 							color:white" id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 						<c:if test="${i!=cur}">
-								<a href="myorder.jhtml?type=init&page=${i}" class="pagesel" 
+								<a href="/orders/user/${sessionScope.get("user").id}?page=${i}" class="pagesel"
 							 id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${cur!=pageCount }">
-						<a href="myorder.jhtml?type=init&page=${cur+1}" title="下一页" class="NextPage" onclick="next()">下一页</a>
+						<a href="/user/2&page=${cur+1}" title="下一页" class="NextPage" onclick="next()">下一页</a>
 					</c:if>
 					<c:if test="${cur==pageCount }">
 						<a href="javascript:;" title="尾页" class="NextPage" onclick="next()">尾页</a>

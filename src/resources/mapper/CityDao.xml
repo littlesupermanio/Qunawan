@@ -8,7 +8,11 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <association property="parentCity" resultMap="parenCityResult"/>
+        <association
+                property="parentCity"
+                column="parent_id"
+                javaType="City"
+                select="com.hhb.dao.CityDao.getCityById" />
     </resultMap>
 
     <resultMap type="City" id="parenCityResult">
@@ -18,6 +22,18 @@
     </resultMap>
 
     <select id="getCityById" parameterType="int" resultMap="CityResult">
-        select c.id,c.name,c.type,p.id pid,p.name pname,p.type ptype from city c,city p where c.parent_id = p.id and c.id = #{cityId}
+        SELECT * FROM City WHERE id = #{cityId}
+    </select>
+
+    <select id="getAllProvinces" resultMap="CityResult">
+        select * from City where type=1
+    </select>
+
+    <select id="getAllCityByParentId" parameterType="int" resultMap="CityResult">
+        select * from City where parent_id= #{parentId}
+    </select>
+
+    <select id="getCityByName" parameterType="string" resultMap="CityResult">
+        select * from city where name = #{cityName}
     </select>
 </mapper>

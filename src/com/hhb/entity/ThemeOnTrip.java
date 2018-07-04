@@ -38,4 +38,12 @@ public class ThemeOnTrip implements Serializable {
 		this.trip = trip;
 	}
 
+	@Override
+	public String toString() {
+		return "ThemeOnTrip{" +
+				"id=" + id +
+				", theme=" + theme +
+				", trip=" + trip +
+				'}';
+	}
 }

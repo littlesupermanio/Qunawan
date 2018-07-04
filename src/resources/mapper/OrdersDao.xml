@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.OrdersDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="OrdersResult" type="Orders">
+        <id property="id" column="id"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="num" column="num"/>
+        <result property="start_time" column="start_time"/>
+        <result property="go_point" column="go_point"/>
+        <result property="go_time" column="go_time"/>
+        <result property="total_price" column="total_price"/>
+        <result property="create_time" column="create_time"/>
+
+        <association property="trip"
+                     column="trip"
+                     javaType="Trip"
+                     select="com.hhb.dao.TripDao.getTripById"/>
+
+        <association property="user"
+                     column="user"
+                     javaType="User"
+                     select="com.hhb.dao.UserDao.getUserById"/>
+
+        <association property="state"
+                     column="state"
+                     javaType="Sequence"
+                     select="com.hhb.dao.SequenceDao.getSequenceById"/>
+    </resultMap>
+
+    <resultMap id="ordersCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+    <select id="getOrderWithSequenceId"  resultMap="OrdersResult">
+        <!-- 具体的sql -->
+        SELECT * FROM Orders o
+        LEFT JOIN User u ON o.user = u.id
+        LEFT JOIN Trip t ON o.trip = t.id
+        WHERE o.user =  #{userId}  AND o.state = #{sequenceId}
+    </select>
+
+    <select id="getOrderById"  parameterType="int" resultMap="OrdersResult">
+       SELECT * FROM Orders WHERE id = #{orderId}
+    </select>
+
+    <select id="getOrdersCountByUser"  parameterType="int" resultMap="ordersCount">
+       SELECT count(*) ct FROM Orders WHERE user =  #{userId}
+    </select>
+
+    <select id="getOrders" resultMap="OrdersResult">
+       SELECT * FROM Orders o
+		WHERE o.user = #{userId}
+		ORDER BY o.create_time desc limit #{offset},#{limit}
+    </select>
+</mapper>

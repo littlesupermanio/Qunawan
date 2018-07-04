@@ -103,6 +103,7 @@ $(document)
 // 自定义日历初始化
 function AjaxTime(e) {
 	var data = $("#price_data").html();
+	console.log(data);
 	if (data.length > 1)
 		pickerEvent.setPriceArr(eval("(" + data + ")"));
 	pickerEvent.Init("start_time");

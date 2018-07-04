@@ -20,20 +20,22 @@
 		<div class="topbar_box">
 			<ul class="top_link">
 				<!-- 一系列的链接，比如，我的资料，积分商城，帮助，微信，微博，电话，等等 -->
-				<li id="person" class="dropdown"><a rel="nofollow"
-					class="lv_link" href="javascript:void(0);">个人中心</a><i class="icon_arrow"></i>
-					<div class="personlist">
-						<ul class="p_ul">
-							<li><a
-								href="${pageContext.request.contextPath }/myorder.jhtml?type=init">我的订单</a></li>
-							<li><a
-								href="${pageContext.request.contextPath }/personalinfo.jhtml?type=init">个人资料</a></li>
-							<li><a
-								href="${pageContext.request.contextPath }/updatepwd.jhtml?type=init">修改密码</a></li>
-							<li><a
-								href="${pageContext.request.contextPath }/mycontact.jhtml?type=getContacts">常用游客</a></li>
-						</ul>
-					</div></li>
+				<c:if test="${not empty user}">
+					<li id="person" class="dropdown"><a rel="nofollow"
+														class="lv_link" href="javascript:void(0);">个人中心</a><i class="icon_arrow"></i>
+						<div class="personlist">
+							<ul class="p_ul">
+								<li><a
+										href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}">我的订单</a></li>
+								<li><a
+										href="${pageContext.request.contextPath }/user/${user.id}">个人资料</a></li>
+								<li><a
+										href="${pageContext.request.contextPath }/updatepwd.jhtml?type=init">修改密码</a></li>
+								<li><a
+										href="${pageContext.request.contextPath }/mycontact.jhtml?type=getContacts">常用游客</a></li>
+							</ul>
+						</div></li>
+				</c:if>
 				<li><a class="lv_link" rel="nofollow"
 					href="javascript:void(0);">积分商城</a></li>
 				<li><a class="lv_link" rel="nofollow"
@@ -53,9 +55,9 @@
 							可用数据：用户id：user  邮箱：eamil   电话：phone   -->
 					<c:choose>
 						<c:when test="${empty user}">
-							<a href="${pageContext.request.contextPath }/WEB-INF/pages/login.jsp">请登录</a>
+							<a href="${pageContext.request.contextPath }/auth/login">请登录</a>
             		 | 		<a
-								href="${pageContext.request.contextPath }/register.jhtml?type=init">免费注册</a>
+								href="${pageContext.request.contextPath }/auth/register">免费注册</a>
 						</c:when>
 						<c:otherwise>
             				当前用户：
@@ -70,7 +72,7 @@
 							</c:choose>
 							
 							<!-- 实训场景013：活跃时长统计（二） - 链接的url重写【START】 -->
-							<a href="${pageContext.request.contextPath }/<%=response.encodeURL("logout.jhtml")%>">注销</a>
+							<a href="${pageContext.request.contextPath }/<%=response.encodeURL("auth/logout")%>">注销</a>
 							<!-- 实训场景013：活跃时长统计（二） - 链接的url重写【END】 -->
 							
 						</c:otherwise>
@@ -84,7 +86,7 @@
 	</div>
 	<div class="header">
 		<div class="inner_herder">
-			<a href="${pageContext.request.contextPath }/index.jhtml">
+			<a href="${pageContext.request.contextPath }/index">
 				<div class="lv_logo">
 					<img src="${pageContext.request.contextPath }/common/img/here.png" />
 					<span>去哪玩旅游网</span>
@@ -147,7 +149,7 @@
 			
 				<!-- 实训场景013：活跃时长统计（二） - 链接的url重写【START】 -->
 				<li id="home"
-					onclick="toIndex('${pageContext.request.contextPath}/<%=response.encodeURL("index.jhtml")%>')"><a>首页</a></li>
+					onclick="toIndex('${pageContext.request.contextPath}/<%=response.encodeURL("index")%>')"><a>首页</a></li>
 				<!-- 实训场景013：活跃时长统计（二） - 链接的url重写【END】 -->	
 				
 				<li id="ticket" class="head-live"><a href="javascript:void(0);">自驾游</a></li>

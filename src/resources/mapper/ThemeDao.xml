@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.ThemeDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="themeResult" type="Theme">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <resultMap id="pageThemes" type="string">
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getThemeByName" parameterType="string" resultMap="themeResult">
+        <!-- 具体的sql -->
+        SELECT * FROM Theme WHERE name = #{themeName}
+    </select>
+
+
+    <select id="getPageThemesByType" resultMap="pageThemes">
+         SELECT DISTINCT th.name FROM ThemeOnTrip tt
+          LEFT JOIN Theme th ON tt.theme = th.id
+          LEFT JOIN Trip t ON tt.trip = t.id
+          WHERE t.type = #{tripType} ORDER BY t.id LIMIT #{offset},#{limit}
+    </select>
+
+
+    <select id="getThemeById" parameterType="int" resultMap="themeResult">
+         SELECT * FROM Theme WHERE id = #{themeId}
+    </select>
+
+
+</mapper>

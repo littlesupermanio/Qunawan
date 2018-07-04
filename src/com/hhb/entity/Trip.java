@@ -169,7 +169,7 @@ public class Trip implements Serializable {
 		this.traffic_score = traffic_score;
 	}
 
-	public Boolean isIs_ok() {
+	public Boolean typeOfIs_ok() {
 		return is_ok;
 	}
 

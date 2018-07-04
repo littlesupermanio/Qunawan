@@ -5,45 +5,179 @@
 <mapper namespace="com.hhb.dao.TripDao">
 
     <!-- 目的：为dao接口方法提供sql语句配置 -->
-    <resultMap id="userResult" type="User">
+    <resultMap id="tripResult" type="Trip">
         <id property="id" column="id"/>
-        <result property="phone" column="phone"/>
-        <result property="password" column="password"/>
-        <result property="name" column="name"/>
-        <result property="sex" column="sex"/>
-        <result property="img_path" column="img_path"/>
-        <result property="email" column="email"/>
-        <result property="birthday" column="birthday"/>
-        <result property="real_name" column="real_name"/>
+        <result property="num" column="num"/>
+        <result property="title" column="title"/>
+        <result property="s_title" column="s_title"/>
+        <result property="traffic" column="traffic"/>
+        <result property="hotel" column="hotel"/>
+        <result property="time" column="time"/>
+        <result property="good_rate" column="good_rate"/>
+        <result property="place_score" column="place_score"/>
+        <result property="hotel_score" column="hotel_score"/>
+        <result property="service_score" column="service_score"/>
+        <result property="traffic_score" column="traffic_score"/>
+        <result property="is_ok" column="is_ok" javaType="java.lang.Boolean"/>
+        <result property="main_picname" column="main_picname"/>
+        <result property="min_price" column="min_price"/>
 
-        <association property="city"
-                     column="city"
+
+        <association property="start"
+                     column="start_place"
                      javaType="City"
                      select="com.hhb.dao.CityDao.getCityById"/>
+
+        <association property="type"
+                     column="type"
+                     javaType="Sequence"
+                     select="com.hhb.dao.SequenceDao.getSequenceById"/>
+
+
+        <association property="detail" column="id" javaType="Detail" select="getDetailByTripId" />
+
+        <association property="position" column="position" javaType="Position" select="getPositionById" />
+
+        <association property="schedule" column="id" javaType="Schedule" select="getScheduleByTripId" />
+
+
+        <collection property="pic_list" ofType="TripPicture" select="getTripPictureByTripId" column="id" />
+
+        <collection property="price_list" ofType="Price" select="getTripPriceListByTripId" column="id" />
+
+        <collection property="themeontrip_list" ofType="ThemeOnTrip" select="getThemeOnTripByTripId" column="id" />
+
+        <collection property="placeontrip_list" ofType="PlaceOnTrip" select="getPlaceOnTripByTripId" column="id" />
+
     </resultMap>
 
 
-    <select id="getTripById" parameterType="int" resultMap="userResult">
+    <!-- Detail 的结果集 -->
+    <resultMap id="detailResult" type="Detail">
+        <id property="id" column="id"/>
+        <result property="place" column="place"/>
+        <result property="hotel" column="hotel"/>
+        <result property="food" column="food"/>
+    </resultMap>
+
+    <!-- TripPicture 的结果集 -->
+    <resultMap id="tripPictureResult" type="TripPicture">
+        <id property="id" column="id"/>
+        <result property="data" column="data"/>
+        <result property="type" column="type"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+
+    <!-- Price 的结果集 -->
+    <resultMap id="priceResult" type="Price">
+        <id property="id" column="id"/>
+        <result property="date" column="date"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <!-- Position 的结果集 -->
+    <resultMap id="positionResult" type="Position">
+        <id property="id" column="id"/>
+        <result property="p1" column="p1"/>
+        <result property="p2" column="p2"/>
+        <result property="level" column="level"/>
+    </resultMap>
+
+    <!-- ThemeOnTrip 的结果集 -->
+    <resultMap id="themeOnTripResult" type="ThemeOnTrip">
+        <id property="id" column="id"/>
+        <association property="theme" column="theme" javaType="Theme" select="com.hhb.dao.ThemeDao.getThemeById" />
+    </resultMap>
+
+    <!-- PlaceOnTrip 的结果集 -->
+    <resultMap id="placeOnTripResult" type="PlaceOnTrip">
+        <id property="id" column="id"/>
+        <association property="place" column="place" javaType="Place" select="com.hhb.dao.PlaceDao.getPlaceById" />
+    </resultMap>
+
+    <!-- Dates 的结果集 -->
+    <resultMap id="datesResult" type="Dates">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="num" column="num"/>
+        <result property="detail" column="detail"/>
+        <result property="hotel" column="hotel"/>
+        <result property="meal" column="meal"/>
+        <result property="traffic" column="traffic"/>
+    </resultMap>
+
+    <!-- Schedule 的结果集 -->
+    <resultMap id="scheduleResult" type="Schedule">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="num" column="num"/>
+        <association property="traffic" column="traffic" javaType="Traffic" select="getTrafficById" />
+        <collection property="dates" ofType="Dates" select="getDatesByScheduleId" column="id" />
+    </resultMap>
+
+    <!-- Traffic 的结果集 -->
+    <resultMap id="trafficResult" type="Traffic">
+        <id property="id" column="id"/>
+        <result property="go_point" column="go_point"/>
+        <result property="go_time" column="go_time"/>
+        <result property="return_point" column="return_point"/>
+        <result property="return_time" column="return_time"/>
+    </resultMap>
+
+    <select id="getScheduleByTripId" parameterType="int" resultMap="scheduleResult">
         <!-- 具体的sql -->
-        select * from user where id = #{userId}
+        SELECT * FROM schedule WHERE trip = #{tripId}
     </select>
 
-    <select id="getUserByCondition" parameterType="string" resultMap="userResult">
+    <select id="getDatesByScheduleId" parameterType="int" resultMap="datesResult">
         <!-- 具体的sql -->
-        select * from user where phone = #{userPhone} or email = #{userEmail}
+        SELECT * FROM Dates WHERE schedule = #{scheduleId}
     </select>
 
-    <!--<select id="queryAll" resultType="Book">-->
-    <!--SELECT-->
-    <!--book_id,-->
-    <!--name,-->
-    <!--number-->
-    <!--FROM-->
-    <!--book-->
-    <!--ORDER BY-->
-    <!--book_id-->
-    <!--LIMIT #{offset}, #{limit}-->
-    <!--</select>-->
+    <select id="getTrafficById" parameterType="int" resultMap="trafficResult">
+        <!-- 具体的sql -->
+        select * from traffic where id = #{trafficId}
+    </select>
+
+    <select id="getTripById" parameterType="int" resultMap="tripResult">
+        <!-- 具体的sql -->
+        select * from trip where id = #{tripId}
+    </select>
+
+    <select id="getDetailByTripId" parameterType="int" resultMap="detailResult">
+        <!-- 具体的sql -->
+        select * from detail where trip = #{tripId}
+    </select>
+
+    <select id="getTripPictureByTripId" parameterType="int" resultMap="tripPictureResult">
+        <!-- 具体的sql -->
+        SELECT * FROM TripPicture tp WHERE tp.trip = #{tripId}
+    </select>
+
+    <select id="getTripPriceListByTripId" parameterType="int" resultMap="priceResult">
+        <!-- 具体的sql -->
+        SELECT * FROM Price p WHERE p.trip = #{tripId}
+    </select>
+
+    <select id="getPositionById" parameterType="int" resultMap="positionResult">
+        <!-- 具体的sql -->
+        SELECT * FROM Position WHERE id = #{positionId}
+    </select>
+
+
+    <select id="getPageTripsByType" resultMap="tripResult">
+        SELECT * FROM Trip t WHERE t.type = #{tripId}
+         ORDER BY t.id LIMIT #{offset},#{limit}
+    </select>
+
+    <select id="getThemeOnTripByTripId" parameterType="int" resultMap="themeOnTripResult">
+        SELECT * FROM ThemeOnTrip tt WHERE tt.trip = #{tripId}
+    </select>
+
+    <select id="getPlaceOnTripByTripId" parameterType="int" resultMap="placeOnTripResult">
+        SELECT * FROM PlaceOnTrip pt WHERE pt.trip = #{tripId}
+    </select>
 
 
 </mapper>

@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
     <servlet>
         <servlet-name>seckill-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -35,6 +39,11 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://www.oraclecsg.com/tlt</taglib-uri>
+            <taglib-location>/WEB-INF/tld/order_info_tag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 
 </web-app>

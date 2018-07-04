@@ -23,6 +23,17 @@
      -->
     <mvc:default-servlet-handler/>
 
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，按顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*"/> <!-- 拦截所有的url包括子url路径 -->
+            <mvc:mapping path="/orders/**"/> <!-- 拦截所有的url包括子url路径 -->
+            <bean class="com.hhb.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+        <!-- 其他拦截器 -->
+    </mvc:interceptors>
+
     <!-- 3.配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

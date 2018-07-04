@@ -11,9 +11,9 @@
 <head>
 	<title>去哪玩_旅游网</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="css/index.css">
-	<script src="js/jquery/jquery-1.11.0.min.js"></script>
-	<script src="js/pages/index/rocket.js"></script>
+	<link rel="stylesheet" href="../../css/index.css">
+	<script src="../../js/jquery/jquery-1.11.0.min.js"></script>
+	<script src="../../js/pages/index/rocket.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -144,7 +144,7 @@
 										<p>
 										
 											<!-- 实训场景013：活跃时长统计（二） - a标签的url重写【START】 -->
-											<a href="<%=response.encodeURL("tripDetail.jhtml")%>?id=${item.id}&type=init" title="###" target="_blank"><img
+											<a href="<%=response.encodeURL("trip")%>/${item.id}" title="###" target="_blank"><img
 												src="image_cache/${item.main_picname }" alt="###" width="290" height="200"></a>
 											<!-- 实训场景013：活跃时长统计（二） - a标签的url重写【END】 -->
 												

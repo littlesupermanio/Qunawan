@@ -14,23 +14,23 @@
 <head>
 	<title>个人空间-个人信息</title>
 	<link type="text/css" rel="stylesheet"
-		href="css/personalCss.css" />
+		href="../../../css/personalCss.css" />
 	<link rel="stylesheet"
-		href="css/jquery.Jcrop.min.css">
+		href="../../../css/jquery.Jcrop.min.css">
 	<link rel="stylesheet" type="text/css"
-		href="css/img_account.css">
+		href="../../../css/img_account.css">
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="../../../js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap/bootstrap.min.js"></script>
+		src="../../../js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/jquery.Jcrop.min.js"></script>
+		src="../../../js/pages/personal/frame/jquery.Jcrop.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/birthday.js"></script>
-	<script src="js/common.js"
+		src="../../../js/pages/personal/frame/birthday.js"></script>
+	<script src="../../../js/common.js"
 		type="text/javascript"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_information.js"></script>
+		src="../../../js/pages/personal/personal_information.js"></script>
 	<script type="text/javascript">
 		var jcrop_api, boundx, boundy, $preview, $pcnt, pimg;
 		var xsize, ysize;
@@ -76,7 +76,7 @@
 					class="icon  icon_my_re_list "> </span> <span
 					class="position_my_re_list">我的约单</span> </a></li>
 			<li class="backgroundClass"}><a
-				href="${pageContext.request.contextPath }/personalinfo.jhtml?type=init"><span
+				href="${pageContext.request.contextPath }/user/${user.id}"><span
 					class="icon  icon_my_re_list  icon_personal"> </span> <span
 					class="position_my_re_list">个人信息</span></a></li>
 			<li><a

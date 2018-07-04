@@ -13,12 +13,12 @@
 	<meta charset="UTF-8">
 	<title>${detail.title}</title>
 	<link rel="stylesheet"
-		href="css/tourist_detail.css"
+		href="../../css/tourist_detail.css"
 		type="text/css" />
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="../../js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/detail/calendar.js"></script>
+		src="../../js/pages/detail/calendar.js"></script>
 		
 	<!--  引入百度地图api地址 开始 -->
 	<script type="text/javascript"
@@ -54,7 +54,7 @@
 			<!-- 导航栏【开始】 -->
 			<div class="navigation">
 				<span class="font_trip_title"> <a
-					href="index.jhtml">首页</a> > <a
+					href="index">首页</a> > <a
 					href="search.jhtml?triptype=${detail.type.value}">${detail.type.value}</a>
 					> <a class="cur">${detail.s_title }</a>
 				</span>

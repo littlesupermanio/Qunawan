@@ -1,6 +1,7 @@
 package com.hhb.dao;
 
 import com.hhb.entity.Trip;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface TripDao {
      * @param maxCount 每页最大值
      * @return 分页行程列表
      */
-    List<Trip> getPageTripsByType(int id, int start, int maxCount);
+    List<Trip> getPageTripsByType(@Param("tripId") int id, @Param("offset") int start, @Param("limit") int maxCount);
 
     /**
      * 通过id查找行程

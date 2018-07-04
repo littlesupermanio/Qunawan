@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>end</short-name>
+<!-- 实训场景020：订单确认信息  标签配置文件注册 【start】-->
+	<tag>
+		<!-- 标签名称 -->
+		<name>orderInfoTag</name>
+		<!-- 标签对应的处理类 -->
+		<tag-class>com.hhb.tag.OrderInfoTag</tag-class>
+		<!-- 标签体内容,有标签体则设为JSP -->
+		<body-content>JSP</body-content>
+		<!-- 标签的属性声明 -->
+		<attribute>
+			<name>trip</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>time</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>num</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+<!-- 实训场景020：订单确认信息  标签配置文件注册 【end】-->
+	
+<!-- 实训场景023：自定义价格函数  标签配置文件注册 【end】-->
+    <function>
+        <!--EL页面调用名字 -->
+        <name>getPriceData</name>
+        <!--指定标签的处理类，指定了标签由哪个Java类来处理。 -->
+        <function-class>com.hhb.tag.FunctionTag</function-class>
+        <!--指定EL页面调用名字中实际调用的方法.指定处理类的实际方法.参数和回调函数要写完整路径 -->
+        <function-signature>java.lang.String getPriceData(java.lang.String)
+        </function-signature>
+    </function>
+<!-- 实训场景023：自定义价格函数  标签配置文件注册 【end】-->
+</taglib>

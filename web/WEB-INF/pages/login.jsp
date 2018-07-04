@@ -17,7 +17,7 @@
 
 			<div class="login_framework">
 			
-				<form id="log_reg_form" method="post" name="loginForm" action="/user/login">
+				<form id="log_reg_form" method="post" name="loginForm" action="/auth/login">
 				
 					<div class="content2">
 						<div id="contents" class="contents">${err_msg}</div>

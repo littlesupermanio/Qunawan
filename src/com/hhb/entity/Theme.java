@@ -38,4 +38,11 @@ public class Theme implements Serializable {
 		this.themeontrip_list = themeontrip_list;
 	}
 
+    @Override
+    public String toString() {
+        return "Theme{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

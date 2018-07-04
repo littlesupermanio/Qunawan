@@ -293,19 +293,20 @@ function checkSelect() {
 }
 // Ajax获取城市下拉列表
 function checkCity() {
+
 	$.ajax({
 		type : "GET",
 		async : true,
-		url : "personalinfo.jhtml",
+		url : "/user/getCity",
 		data : {
 			province : $("#province").val(),
-			type : 'getCity'
 		},
 		dataType : "json",
 		success : function(data) {
+
 			$('#select_city').empty(); // 清空resText里面的所有内容
 			var html = '';
-			$.each(data, function(index, item) {
+			$.each(data.data, function(index, item) {
 				html += '<option value=' + item['id'] + '>' + item['name']
 						+ '</option>';
 			});

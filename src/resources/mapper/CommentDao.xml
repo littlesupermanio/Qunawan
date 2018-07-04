@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.CommentDao">
+
+    <resultMap type="Comment" id="CommentResult">
+        <id property="id" column="id"/>
+        <result property="place" column="place"/>
+        <result property="hotel" column="hotel"/>
+        <result property="service" column="serivce"/>
+        <result property="traffic" column="traffic"/>
+        <result property="content" column="content"/>
+        <result property="time" column="time"/>
+        <result property="usefull" column="usefull"/>
+        <result property="useless" column="useless"/>
+        <association
+                property="user"
+                column="uid"
+                javaType="User"
+                select="com.hhb.dao.UserDao.getUserById" />
+
+        <collection property="pictures" ofType="CommentPicture" select="com.hhb.dao.CommentPicDao.getCommentPics" column="id" />
+    </resultMap>
+
+    <resultMap id="commentCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+    <select id="getCommentCount" parameterType="int" resultMap="commentCount">
+        select count(*) ct from comment where trip = #{tripId}
+    </select>
+
+    <select id="getCommentsByTripId" parameterType="int" resultMap="CommentResult">
+        select c.id,c.trip,c.place,c.hotel,c.service,c.traffic,c.content,c.time,c.usefull,c.useless,u.name,u.id uid
+		from comment c,user u  where c.user=u.id and c.trip = #{tripId} order by c.time desc
+    </select>
+
+</mapper>

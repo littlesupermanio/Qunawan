@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.SequenceDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="sequenceResult" type="Sequence">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="keying" column="keying"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <resultMap id="pagePlaces" type="string">
+        <result property="name" column="name"/>
+    </resultMap>
+
+
+    <select id="getSeqByValue" parameterType="string" resultMap="sequenceResult">
+        <!-- 具体的sql -->
+        SELECT * FROM Sequence WHERE value = #{sequenceValue}
+    </select>
+
+    <select id="getSeqByKeyAndType" parameterType="int" resultMap="sequenceResult">
+        <!-- 具体的sql -->
+        select * from Sequence where keying = #{key} and type = #{type}
+    </select>
+
+    <select id="getSequenceById" parameterType="int" resultMap="sequenceResult">
+        select * from Sequence where id = #{sequenceId}
+    </select>
+
+
+</mapper>
