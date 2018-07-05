@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.OrderContactDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="OrderContactResult" type="OrderContact">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+
+        <association property="contact"
+                     column="contact"
+                     javaType="Contact"
+                     select="com.hhb.dao.ContactDao.getContactById"/>
+    </resultMap>
+
+    <resultMap id="orderContactsCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+    <select id="getOrderContacts" resultMap="OrderContactResult">
+       SELECT * from Contact c,ordercontact oc
+	    where #{orderId} = oc.orders and oc.type = #{typeId} and oc.contact=c.id;
+    </select>
+
+    <select id="getOrderContactsCount" parameterType="int" resultMap="orderContactsCount">
+        select count(*) ct from ordercontact where contact= #{contactId}
+    </select>
+
+    <insert id="saveOrderContact" parameterType="com.hhb.entity.OrderContact">
+        INSERT INTO OrderContact(orders,contact,type)
+		VALUES(#{order.id},#{contact.id},#{type})
+    </insert>
+
+</mapper>

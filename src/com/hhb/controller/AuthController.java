@@ -40,6 +40,10 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     private String login(@RequestParam(value="name") String condition, @RequestParam(value="password") String password, Model model, HttpServletRequest request) {
+        User ifUser = (User) request.getSession().getAttribute("user");
+        if(ifUser!=null) {
+            return "redirect:/index";
+        }
 
         User user = userDao.getUserByCondition(condition);
         if(user==null||!user.getPassword().equals(Utils.toMD5(password))) {

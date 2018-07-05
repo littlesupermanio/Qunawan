@@ -53,13 +53,13 @@ public interface OrdersDao {
          * @param state 需要更新到的状态
          * @param id 订单id
          */
-        void updateOrderState(Sequence state, Integer id);
+        void updateOrderState(@Param("state") Sequence sequence, @Param("orderId") Integer id);
 
         /**
          * 保存订单
          * @param order 订单对象
          * @return 该订单记录的id值
          */
-        int savaOrder(Orders order);
+        int saveOrder(Orders order);
 }
 

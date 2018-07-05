@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.ContactDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="ContactResult" type="Contact">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <result property="cardno" column="cardno"/>
+        <result property="birthday" column="birthday"/>
+
+        <association property="user"
+                     column="user"
+                     javaType="User"
+                     select="com.hhb.dao.UserDao.getUserById"/>
+    </resultMap>
+
+    <resultMap id="contactCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+
+    <select id="getAllContactByUser" parameterType="int" resultMap="ContactResult">
+        SELECT * FROM Contact WHERE user = #{userId}
+    </select>
+
+    <select id="getContactById" parameterType="int" resultMap="ContactResult">
+        SELECT * FROM Contact c
+		LEFT JOIN User u ON c.user = u.id where c.id = #{contactId}
+    </select>
+
+    <select id="getContactCountByUser" parameterType="int" resultMap="ContactResult">
+        select count(*) ct from contact where user= #{userId}
+    </select>
+    <select id="getAllContactPerPage" resultMap="ContactResult">
+        select * from Contact where user= #{userId} limit #{offset},#{limit}
+    </select>
+
+
+    <insert id="saveContactWithUserId">
+        INSERT INTO Contact(user,name,phone,sex,email,cardno,birthday)
+        VALUES(#{userId},#{contact.name},#{contact.phone},#{contact.sex},#{contact.email},#{contact.cardno},#{contact.birthday})
+    </insert>
+
+    <insert id="saveContact" parameterType="com.hhb.entity.Contact">
+        INSERT INTO Contact(user,name,phone,sex,email,cardno,birthday)
+        VALUES(#{user.id},#{name},#{phone},#{sex},#{email},#{cardno},#{birthday})
+    </insert>
+</mapper>

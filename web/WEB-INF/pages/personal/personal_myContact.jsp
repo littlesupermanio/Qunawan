@@ -14,35 +14,35 @@
 <head>
 	<title>个人空间-常用游客</title>
 	<link type="text/css" rel="stylesheet"
-		href="css/personalCss.css" />
+		href="<%=basePath%>/css/personalCss.css" />
 	<link rel="stylesheet" type="text/css"
-		href="css/img_account.css">
+		href="<%=basePath%>/css/img_account.css">
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="<%=basePath%>/js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap/bootstrap.min.js"></script>
+		src="<%=basePath%>/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/birthday.js"></script>
-	<script src="js/common.js"
+		src="<%=basePath%>/js/pages/personal/frame/birthday.js"></script>
+	<script src="<%=basePath%>/js/common.js"
 		type="text/javascript"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_information.js"></script>
+		src="<%=basePath%>/js/pages/personal/personal_information.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_contact.js"></script>
+		src="<%=basePath%>/js/pages/personal/personal_contact.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
 
 	<!-- 个人空间 开始-->
 	<div class="content_infor">
-		<a href="index.jhtml">我的去哪玩</a>> <a
-			href="personalinfo.jhtml?type=init">个人空间</a>>
-		<a id="target_title3" href="javascript:;">我的联系人</a>
+		<a href="index">我的去哪玩</a>> <a
+			href="/user">个人空间</a>>
+		<a id="target_title3" href="">我的联系人</a>
 	</div>
 	<div class="content_all">
 
 		<!-- 左边  菜单栏开始-->
-	
+
 		<div class="content_left">
 	<div class="content_left_first">
 		<c:choose>
@@ -58,58 +58,65 @@
 	</div>
 	<div class="content_left_two">
 		<ul>
-			<li ><a
-				href="${pageContext.request.contextPath }/myorder.jhtml?type=init"><span
-					class="icon  icon_my_re_list "> </span> <span
-					class="position_my_re_list">我的约单</span> </a></li>
-			<li><a
-				href="${pageContext.request.contextPath }/personalinfo.jhtml?type=init"><span
-					class="icon  icon_my_re_list  icon_personal"> </span> <span
-					class="position_my_re_list">个人信息</span></a></li>
-			<li><a
-				href="${pageContext.request.contextPath }/updatepwd.jhtml?type=init"><span
-					class="icon  icon_my_re_list  icon_password" style=""> </span> <span
-					class="position_my_re_list">密码修改</span></a></li>
-			<li ><a
-				href="${pageContext.request.contextPath }/mycomment.jhtml?type=init"><span
-					class="icon  icon_my_re_list icon_comment " style=""> </span> <span
-					class="position_my_re_list">我的点评</span></a></li>
-			<span class="hr_css">
-				<hr style="width: 120px; border-top: 1px #ccc solid;" />
+            <li><a
+                    href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}"><span
+                    class="icon  icon_my_re_list "> </span> <span
+                    class="position_my_re_list">我的约单</span> </a></li>
+            <li><a
+                    href="${pageContext.request.contextPath }/user"><span
+                    class="icon  icon_my_re_list  icon_personal"> </span> <span
+                    class="position_my_re_list">个人信息</span></a></li>
+            <li ><a
+                    href="${pageContext.request.contextPath }/user/changePass"><span
+                    class="icon  icon_my_re_list  icon_password" style=""> </span> <span
+                    class="position_my_re_list">密码修改</span></a></li>
+            <li><a
+                    href="${pageContext.request.contextPath }/user/comments"><span
+                    class="icon  icon_my_re_list icon_comment " style=""> </span> <span
+                    class="position_my_re_list">我的点评</span></a></li>
+            <span class="hr_css">
+				<hr style="width: 120px; border-top: 1px #ccc solid;"/>
 			</span>
-			<li class="backgroundClass"><a
-				href="${pageContext.request.contextPath }/mycontact.jhtml?type=getContacts"><span
-					class="icon  icon_my_re_list iconusually" style=""> </span> <span
-					class="position_my_re_list">常用游客信息</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span 
-					class="icon  icon_my_re_list icon_card " style="cursor: default;color: gray;"> </span> <span style="cursor:default; color: gray;"
-					class="position_my_re_list">礼品卡</span></a></li>
-			<li style="cursor: default;text-decoration:none;"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list iconmoney " style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list">我的积分</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_email " style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list">邮件订阅</span></a></li>
-			<span class="hr_css">
-				<hr style="width: 120px; border-top: 1px #ccc solid;" />
+            <li class="backgroundClass" ><a
+                    href="${pageContext.request.contextPath }/user/contacts"><span
+                    class="icon  icon_my_re_list iconusually" style=""> </span> <span
+                    class="position_my_re_list">常用游客信息</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_card " style="cursor: default;color: gray;"> </span> <span
+                    style="cursor:default; color: gray;"
+                    class="position_my_re_list">礼品卡</span></a></li>
+            <li style="cursor: default;text-decoration:none;"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list iconmoney " style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list">我的积分</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_email " style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list">邮件订阅</span></a></li>
+            <span class="hr_css">
+				<hr style="width: 120px; border-top: 1px #ccc solid;"/>
 			</span>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_vip" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list ">会员俱乐部</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_way" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list">我的攻略</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_collection" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list" style="cursor:default">我的收藏</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_my_tour" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
-					class="position_my_re_list">我的游记</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_vip" style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list ">会员俱乐部</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_way" style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list">我的攻略</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_collection" style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list" style="cursor:default">我的收藏</span></a></li>
+            <li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+                    class="icon  icon_my_re_list icon_my_tour" style="cursor: default;color: gray;"> </span> <span
+                    style="cursor: default;color: gray;"
+                    class="position_my_re_list">我的游记</span></a></li>
 		</ul>
 	</div>
 </div>
-		
-		
+
+
 		<!-- 左边  菜单栏结事-->
 
 		<!-- 右侧  选项卡开始-->
@@ -209,21 +216,21 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="Pages"> <!-- id="contactPages" --> 
+				<div class="Pages"> <!-- id="contactPages" -->
 					<c:if test="${cur!=1 }">
 						<a href="mycontact.jhtml?type=getContacts&page=${cur-1}" title="上一页" class="PrevPage">上一页</a>
 					</c:if>
 					<c:if test="${cur==1 }">
 						<a href="javascript:;" title="首页" class="PrevPage">首页</a>
 					</c:if>
-					
+
 					<c:forEach var="i" begin="1" end="${pageCount}">
 						<c:if test="${i==cur}">
 								<a href="mycontact.jhtml?type=getContactst&page=${i}" class="pagesel" style="background-color:#DF1A7A;
 							color:white" id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 						<c:if test="${i!=cur}">
-								<a href="mycontact.jhtml?type=getContacts&page=${i}" class="pagesel" 
+								<a href="mycontact.jhtml?type=getContacts&page=${i}" class="pagesel"
 							 id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 					</c:forEach>
@@ -247,6 +254,6 @@
 	<iframe src="common/footer.jsp"
 		style="width: 100%; height: 650px; border: 0; overflow: hidden;"></iframe>
 	<!-- 引入尾部结束 -->
-	
+
 </body>
 </html>

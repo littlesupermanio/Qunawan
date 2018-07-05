@@ -28,11 +28,11 @@
 								<li><a
 										href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}">我的订单</a></li>
 								<li><a
-										href="${pageContext.request.contextPath }/user/${user.id}">个人资料</a></li>
+										href="${pageContext.request.contextPath }/user">个人资料</a></li>
 								<li><a
-										href="${pageContext.request.contextPath }/updatepwd.jhtml?type=init">修改密码</a></li>
+										href="${pageContext.request.contextPath }/user/changePass">修改密码</a></li>
 								<li><a
-										href="${pageContext.request.contextPath }/mycontact.jhtml?type=getContacts">常用游客</a></li>
+										href="${pageContext.request.contextPath }/user/contacts">常用游客</a></li>
 							</ul>
 						</div></li>
 				</c:if>

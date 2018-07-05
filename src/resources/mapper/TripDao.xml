@@ -179,5 +179,11 @@
         SELECT * FROM PlaceOnTrip pt WHERE pt.trip = #{tripId}
     </select>
 
-
+    <select id="getPageTripByCondition" resultMap="tripResult">
+        SELECT distinct t.*, (SELECT min(price) FROM Price WHERE trip=t.id) AS price_sort FROM Trip t,Price p WHERE t.id=p.trip AND t.is_ok=1
+        <if test="vo.type_id != null">
+            and t.type = #{vo.type_id}
+        </if>
+        limit #{offset},#{limit}
+    </select>
 </mapper>

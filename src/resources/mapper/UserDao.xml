@@ -32,17 +32,18 @@
         select * from user where phone = #{userPhone} or email = #{userEmail}
     </select>
 
-    <!--<select id="queryAll" resultType="Book">-->
-        <!--SELECT-->
-            <!--book_id,-->
-            <!--name,-->
-            <!--number-->
-        <!--FROM-->
-            <!--book-->
-        <!--ORDER BY-->
-            <!--book_id-->
-        <!--LIMIT #{offset}, #{limit}-->
-    <!--</select>-->
+    <update id="update" parameterType="com.hhb.entity.User">
+        update user set phone=#{phone},email=#{email},sex=#{sex},password = #{password},
+        name = #{name},
+        img_path = #{img_path},
+        real_name = #{real_name},
+        birthday = #{birthday},
+        city = #{city.id}
+        where id = #{id}
+    </update>
 
+    <insert id="insert" parameterType="com.hhb.entity.User">
+        INSERT INTO User(phone,email,password) VALUES(#{phone},#{email},#{password})
+    </insert>
 
 </mapper>

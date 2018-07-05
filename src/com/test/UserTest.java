@@ -48,6 +48,9 @@ public class UserTest extends BaseTest{
     public void UserDaoTest() {
         int userId = 1;
         User user = userDao.getUserById(userId);
+        user.setName("张小飞");
+        user.setCity(cityDao.getCityById(101));
+        userDao.update(user);
         System.out.println(user);
     }
 

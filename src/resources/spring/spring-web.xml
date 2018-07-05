@@ -28,6 +28,7 @@
         <!-- 多个拦截器，按顺序执行 -->
         <mvc:interceptor>
             <mvc:mapping path="/user/*"/> <!-- 拦截所有的url包括子url路径 -->
+            <mvc:mapping path="/user*"/> <!-- 拦截所有的url包括子url路径 -->
             <mvc:mapping path="/orders/**"/> <!-- 拦截所有的url包括子url路径 -->
             <bean class="com.hhb.interceptor.AuthInterceptor"/>
         </mvc:interceptor>
@@ -39,6 +40,15 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 最大内存大小 -->
+        <property name="maxInMemorySize" value="10240"/>
+        <!-- 最大文件大小，-1为不限制大小 -->
+        <property name="maxUploadSize" value="-1"/>
     </bean>
 
     <!-- 4.扫描web相关的bean -->

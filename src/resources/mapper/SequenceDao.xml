@@ -23,7 +23,7 @@
         SELECT * FROM Sequence WHERE value = #{sequenceValue}
     </select>
 
-    <select id="getSeqByKeyAndType" parameterType="int" resultMap="sequenceResult">
+    <select id="getSeqByKeyAndType" resultMap="sequenceResult">
         <!-- 具体的sql -->
         select * from Sequence where keying = #{key} and type = #{type}
     </select>

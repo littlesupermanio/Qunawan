@@ -1,10 +1,17 @@
 package com.hhb.controller;
 
+import com.hhb.dao.ContactDao;
 import com.hhb.dao.OrdersDao;
+import com.hhb.dao.TripDao;
+import com.hhb.entity.Contact;
 import com.hhb.entity.Orders;
+import com.hhb.entity.Trip;
+import com.hhb.entity.User;
 import com.hhb.form.OrderDetailForm;
 import com.hhb.form.OrderForm;
+import com.hhb.form.PutOrderForm;
 import com.hhb.globle.Constants;
+import com.hhb.service.OrdersService;
 import com.hhb.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,7 +36,14 @@ public class OrdersController {
     String pageId;
 
     @Autowired
-    OrdersDao ordersDao;
+    private OrdersDao ordersDao;
+    @Autowired
+    private TripDao tripDao;
+    @Autowired
+    private ContactDao contactDao;
+    @Autowired
+    private OrdersService ordersService;
+
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     public ModelAndView getOrders(@PathVariable("userId") int userId, @RequestParam(value = "page", required=false) String pageId, HttpServletRequest request){
@@ -41,13 +58,104 @@ public class OrdersController {
         return mv;
     }
 
-    @RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
-    public ModelAndView getOrders(@PathVariable("orderId") int orderId, HttpServletRequest request){
+    @RequestMapping(value = "/{orderId}/detail", method = RequestMethod.GET)
+    public ModelAndView getOrders(@PathVariable("orderId") int order_id, HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
+
         OrderDetailForm orderDetailForm = new OrderDetailForm();
 
+        orderDetailForm.setContact_many(ordersService.getContactsByOrderId(order_id));
+        orderDetailForm.setContact_one(ordersService.getContactByOrderId(order_id));
+        orderDetailForm.setOrder(ordersDao.getOrderById(order_id));
 
-        mv.setViewName("personal/personal_myOrder");
+        request.getSession().setAttribute("orderDetailForm", orderDetailForm);
+
+        mv.setViewName("order_detail");
+        return mv;
+    }
+
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    public ModelAndView confirmOrder(@RequestParam("trip_id") String putOrder_trip_id,@RequestParam("num") String putOrder_numStr,
+                                     @RequestParam("date") String putOrder_go_time,
+                                     HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        int userId = user.getId();
+        ModelAndView mv = new ModelAndView();
+        // 获取行程对象
+        int tid = Integer.parseInt(putOrder_trip_id);
+        Trip trip = tripDao.getTripById(tid);
+        // 人数参数类型转换
+        int num = Integer.parseInt(putOrder_numStr);
+
+        // 日期参数类型转换
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        ParsePosition pos = new ParsePosition(0);
+        Date time = formatter.parse(putOrder_go_time, pos);
+        java.sql.Date date = new java.sql.Date(time.getTime());
+
+        // 通过出行日期和人数以及产品，查询总价格
+        float price = ordersService.getTripPrice(date, num, trip);
+        List<Contact> contacts = contactDao.getAllContactByUser(userId);
+
+        // 订单保存进行确认处理
+        request.getSession().setAttribute("put_order_trip", trip);
+        request.getSession().setAttribute("put_order_num", num);
+        request.getSession().setAttribute("put_order_price", price);
+        request.getSession().setAttribute("put_order_time", time);
+        request.getSession().setAttribute("put_order_contactlist", contacts);
+
+        mv.setViewName("order");
+        return mv;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ModelAndView putOrder(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        ModelAndView mv = new ModelAndView();
+
+        // 获取紧急联系人信息
+        String em_id = request.getParameter("em_id");
+        String em_name = request.getParameter("em_name");
+        String em_phone = request.getParameter("em_phone");
+
+        // 获取订单的详细信息
+        Trip trip = (Trip) request.getSession().getAttribute("put_order_trip");
+        float price = (float) request.getSession().getAttribute("put_order_price");
+        int num = (int) request.getSession().getAttribute("put_order_num");
+        Date time = (Date) request.getSession().getAttribute("put_order_time");
+
+        // 遍历获取游玩人的信息，保存在数组之中
+        String[] id = request.getParameterValues("w_id");
+        String[] name = request.getParameterValues("w_name");
+        String[] phone = request.getParameterValues("w_phone");
+        String[] cardno = request.getParameterValues("w_cardno");
+        // 获取选择上车的地点信息
+        String place = request.getParameter("place");
+
+//        System.out.println("num"+num);
+//        System.out.println("price" + price);
+
+        // 封装订单信息
+        Orders order = ordersService.packOrder(num, time, price, place, trip, user);
+        // 生成紧急联系人
+        Contact em_contact = ordersService.packContact(em_id, em_name, em_phone, user);
+        // 生成游客
+        List<Contact> contacts = new ArrayList<Contact>();
+        for (int i = 0; i < num; i++) {
+            String cid = "";
+            if(id != null && i<id.length)
+                cid = id[i];
+            Contact contact = ordersService.packContact(cid, name[i], phone[i], cardno[i], user);
+            contacts.add(contact);
+        }
+
+        ordersService.putOrder(order, em_contact, contacts);
+
+        // 数据封装并响应
+        PutOrderForm pof = new PutOrderForm(order);
+        mv.addObject("vo", pof);
+
+        mv.setViewName("order_pay");
         return mv;
     }
 

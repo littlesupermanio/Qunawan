@@ -1,4 +1,4 @@
-<%@page import="campsg.qunawan.entity.Orders"%>
+<%@page import="com.hhb.entity.Orders"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -18,11 +18,11 @@
 	<title>订单确认-去哪玩旅游网</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet"
-		href="css/common.css">
+		href="<%=basePath%>/css/common.css">
 	<link rel="stylesheet" 
-		href="css/order.css">
+		href="<%=basePath%>/css/order.css">
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="<%=basePath%>/js/jquery/jquery-1.11.0.min.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -52,7 +52,7 @@
 			<!-- 步骤【结束】 -->
 
 			<div class="panel1">
-				<form id="putOrderForm" action="myorder.jhtml?type=putOrder" method="post">
+				<form id="putOrderForm" action="/orders" method="post">
 				
 				<!-- 订单信息1——详情【开始】 -->
 				<!-- 实训场景020：订单确认信息  引用自定义标签 【start】-->
@@ -308,7 +308,7 @@
 		})
 	</script>
 	<script type="text/javascript"
-		src="js/pages/order/order.js"></script>
+		src="<%=basePath%>/js/pages/order/order.js"></script>
 	<!-- 主体【结束】 -->
 
 	<!-- 引入尾部开始 -->

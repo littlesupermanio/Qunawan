@@ -11,9 +11,9 @@
 <head>
 	<title>订单详情-去哪玩旅游网</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/order_detail.css">
-	<script src="js/jquery-1.10.2.min.js"></script>
+	<link rel="stylesheet" href="<%=basePath%>/css/common.css">
+	<link rel="stylesheet" href="<%=basePath%>/css/order_detail.css">
+	<script src="<%=basePath%>js/jquery-1.10.2.min.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -27,7 +27,7 @@
 			<!-- 导航栏【开始】 -->
 			<div class="navigation">
 				<span class="font_g9"> <a href="index.jhtml">我的去哪玩</a> > <a href="myorder.jhtml?type=init">我的订单</a>
-					> <a class="cur" href="javascript:void(0);">订单详情</a> <span>
+					> <a class="cur" href="javascript:void(0);">订单详情</a> </span>
 			</div>
 			<!-- 导航栏【结束】 -->
 			<div class="content">

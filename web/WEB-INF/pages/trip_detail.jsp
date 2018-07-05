@@ -197,7 +197,7 @@
 			<!-- 顶部产品概览 结束 -->
 
 			<!-- 开始预定 开始 -->
-			<form method="POST" action="myorder.jhtml?type=confirmOrder"
+			<form method="POST" action="/orders/confirm"
 				name="orderForm" id="order-submit">
 				<div class="product-preorder clearfix color-style1"
 					id="product-preorder">

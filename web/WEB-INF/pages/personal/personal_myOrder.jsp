@@ -52,52 +52,59 @@
 	</div>
 	<div class="content_left_two">
 		<ul>
-			<li class="backgroundClass"><a
-				href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}"><span
+			<li class="backgroundClass" ><a
+					href="${pageContext.request.contextPath }/orders/user/${sessionScope.get("user").id}"><span
 					class="icon  icon_my_re_list "> </span> <span
 					class="position_my_re_list">我的约单</span> </a></li>
-			<li ><a
-				href="${pageContext.request.contextPath }/user/${sessionScope.get("user").id}"><span
+			<li><a
+					href="${pageContext.request.contextPath }/user"><span
 					class="icon  icon_my_re_list  icon_personal"> </span> <span
 					class="position_my_re_list">个人信息</span></a></li>
 			<li ><a
-				href="${pageContext.request.contextPath }/updatepwd.jhtml?type=init"><span
+					href="${pageContext.request.contextPath }/user/changePass"><span
 					class="icon  icon_my_re_list  icon_password" style=""> </span> <span
 					class="position_my_re_list">密码修改</span></a></li>
 			<li><a
-				href="${pageContext.request.contextPath }/mycomment.jhtml?type=init"><span
+					href="${pageContext.request.contextPath }/user/comments"><span
 					class="icon  icon_my_re_list icon_comment " style=""> </span> <span
 					class="position_my_re_list">我的点评</span></a></li>
 			<span class="hr_css">
-				<hr style="width: 120px; border-top: 1px #ccc solid;" />
+				<hr style="width: 120px; border-top: 1px #ccc solid;"/>
 			</span>
 			<li><a
-				href="${pageContext.request.contextPath }/mycontact.jhtml?type=getContacts"><span
+					href="${pageContext.request.contextPath }/user/contacts"><span
 					class="icon  icon_my_re_list iconusually" style=""> </span> <span
 					class="position_my_re_list">常用游客信息</span></a></li>
-			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span 
-					class="icon  icon_my_re_list icon_card " style="cursor: default;color: gray;"> </span> <span style="cursor:default; color: gray;"
+			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
+					class="icon  icon_my_re_list icon_card " style="cursor: default;color: gray;"> </span> <span
+					style="cursor:default; color: gray;"
 					class="position_my_re_list">礼品卡</span></a></li>
 			<li style="cursor: default;text-decoration:none;"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list iconmoney " style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list iconmoney " style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list">我的积分</span></a></li>
 			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_email " style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list icon_email " style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list">邮件订阅</span></a></li>
 			<span class="hr_css">
-				<hr style="width: 120px; border-top: 1px #ccc solid;" />
+				<hr style="width: 120px; border-top: 1px #ccc solid;"/>
 			</span>
 			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_vip" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list icon_vip" style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list ">会员俱乐部</span></a></li>
 			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_way" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list icon_way" style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list">我的攻略</span></a></li>
 			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_collection" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list icon_collection" style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list" style="cursor:default">我的收藏</span></a></li>
 			<li style="cursor:default"><a href="javascript:;" style="cursor:default"><span
-					class="icon  icon_my_re_list icon_my_tour" style="cursor: default;color: gray;"> </span> <span style="cursor: default;color: gray;"
+					class="icon  icon_my_re_list icon_my_tour" style="cursor: default;color: gray;"> </span> <span
+					style="cursor: default;color: gray;"
 					class="position_my_re_list">我的游记</span></a></li>
 		</ul>
 	</div>
@@ -151,7 +158,7 @@
 										<span class="text_color span_width ">
 											<a class="text_color" href=
 												<c:if test="${ item.state.keying == 0}">
-													'myorder.jhtml?type=showPayFor&id=${ item.orderid}'
+													'/orders/${ item.orderid}/detail'
 												</c:if>  
 												<c:if test="${ item.state.keying == 1}">
 													'#'
@@ -169,7 +176,7 @@
 													评价
 												</c:if> 
 											</a></span><br />
-										<span class="text_color span_width"><a  href="myorder.jhtml?type=initOrderDetail&order_id=${ item.orderid}" target="view_window">订单详情</a></span>
+										<span class="text_color span_width"><a  href="/orders/${ item.orderid}/detail" target="_blank">订单详情</a></span>
 									</td>
 									<td><span class="text_color span_width  ">
 												<c:if test="${ item.state.value=='待评价'}">
@@ -233,7 +240,7 @@
 	<!-- 个人空间 结束-->
 
 	<!-- 引入尾部开始 -->
-	<iframe src="common/footer.jsp"
+	<iframe src="<%= basePath %>/common/footer.jsp"
 		style="width: 100%; height: 650px; border: 0; overflow: hidden;"></iframe>
 	<!-- 引入尾部结束 -->
 

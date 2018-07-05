@@ -1,6 +1,7 @@
 package com.hhb.dao;
 
 import com.hhb.entity.Contact;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ContactDao {
      */
     Integer getContactByUser(Integer userId);
 
-    List<Contact> getAllContactPerPage(Integer userId, int page, int maxResult);
+    List<Contact> getAllContactPerPage(@Param("userId") Integer userId,@Param("offset") int page,@Param("limit") int maxResult);
 
     /**
      * 获取某用户的所有联系人
@@ -40,7 +41,7 @@ public interface ContactDao {
      * @param contact 联系人对象
      * @param userId  联系人对应的用户对象
      */
-    void saveContact(Contact contact, Integer userId);
+    void saveContactWithUserId(@Param("contact") Contact contact, @Param("userId") Integer userId);
 
     /**
      * 更新联系人
@@ -49,7 +50,7 @@ public interface ContactDao {
      * @return 更新的联系人的id值
      */
     Integer updateContact(Contact c);
-    
+
     /**
      * 通过id获取联系人
      * @param id 联系人id值

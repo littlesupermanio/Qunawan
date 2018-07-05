@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhb.dao.PriceDao">
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <resultMap id="PriceResult" type="Price">
+        <id property="id" column="id"/>
+        <result property="date" column="date"/>
+        <result property="price" column="price"/>
+
+
+        <association property="trip"
+                     column="trip"
+                     javaType="Trip"
+                     select="com.hhb.dao.TripDao.getTripById"/>
+    </resultMap>
+
+    <resultMap id="contactCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+    <select id="getOneDayPrice" resultMap="PriceResult">
+        SELECT * FROM Price WHERE trip = #{tripId} AND date = #{date}
+    </select>
+
+    <select id="getPricesByTripId" parameterType="int" resultMap="PriceResult">
+        SELECT * FROM Price p WHERE p.trip = #{tripId}
+    </select>
+
+</mapper>
