@@ -29,7 +29,8 @@ public class OrderTest extends BaseTest {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timestr = df.format(new Date(System.currentTimeMillis()));
         order.setCreate_time(timestr);
-        ordersDao.saveOrder(order);
+        int ordernum = ordersDao.saveOrder(order);
+        System.out.println(order.getId());
 
     }
 

@@ -184,6 +184,44 @@
         <if test="vo.type_id != null">
             and t.type = #{vo.type_id}
         </if>
+        <if test="vo.start_place_id_list != null">
+            AND
+            <foreach item="item" index="index" collection="#{vo.start_place_id_list}" open="(" separator="OR" close=")">
+                t.start_place= t.start_place= #{item}
+            </foreach>
+        </if>
+        <if test="vo.traffic != null" >
+            AND t.traffic LIKE "%"#{vo.traffic}"%"
+        </if>
+
         limit #{offset},#{limit}
     </select>
+
+    <select id="getAllTripByCondition" resultMap="tripResult">
+        SELECT distinct t.*, (SELECT min(price) FROM Price WHERE trip=t.id) AS price_sort FROM Trip t,Price p WHERE t.id=p.trip AND t.is_ok=1
+        <if test="vo.type_id != null">
+            and t.type = #{vo.type_id}
+        </if>
+        <if test="vo.start_place_id_list != null">
+            AND
+            <foreach item="item" index="index" collection="#{vo.start_place_id_list}" open="(" separator="OR" close=")">
+                t.start_place= t.start_place= #{item}
+            </foreach>
+        </if>
+        <if test="vo.traffic != null" >
+            AND t.traffic LIKE "%"#{vo.traffic}"%"
+        </if>
+    </select>
+
+
+    <update id="updateScore" parameterType="com.hhb.entity.Trip">
+        update trip set good_rate= #{good_rate}
+        and place_score= #{place_score}
+        and hotel_score= #{hotel_score}
+        and service_score= #{service_score}
+        and traffic_score= #{traffic_score}
+        where id = #{id}
+    </update>
+
+
 </mapper>

@@ -14,7 +14,7 @@ public interface CommentDao {
      * @param firstResult 本页起始位置
      * @return 评论集合
      */
-    List<Comment> getCommentsPerPage(Integer userId, Integer sq_id, Integer page, Integer max);
+    List<Comment> getCommentsPerPage(@Param("userId") Integer userId, @Param("sq_id") Integer sq_id, @Param("offset") Integer page,@Param("limit") Integer max);
 
     /**
      * 获取产品集合的长度
@@ -35,7 +35,7 @@ public interface CommentDao {
      * 行程单项平均分
      * type：评论评分的属性名称
      */
-    Float getAvg_Score(String type, Integer tripId) ;
+    Float getAvg_Score(@Param("typeName") String type, @Param("tripId") Integer tripId) ;
 
     /**
      * 按照【平均分】-【评论个数】的方式查询评论数据

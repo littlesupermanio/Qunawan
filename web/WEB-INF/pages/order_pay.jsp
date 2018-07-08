@@ -154,7 +154,7 @@
 									</ul>
 								</div>
 								<div class="order-btn">
-									<a href="myorder.jhtml?type=payForOrder&id=${vo.id }">
+									<a href="/orders/${vo.id }/pay">
 										<button class="pbtn pbtn-big pbtn-orange">&nbsp;&nbsp;确认付款&nbsp;&nbsp;</button>
 									</a>
 								</div>
@@ -202,7 +202,7 @@
 									</ul>
 								</div>
 								<div class="order-btn">
-									<a href="myorder.jhtml?type=payForOrder&id=${vo.id }">
+									<a href="/orders/${vo.id }/pay">
 										<button class="pbtn pbtn-big pbtn-orange">&nbsp;&nbsp;确认付款&nbsp;&nbsp;</button>
 									</a>
 								</div>

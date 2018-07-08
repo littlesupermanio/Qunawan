@@ -14,7 +14,7 @@ public interface TripDao {
      *            筛选表单
      * @return 所有行程记录
      */
-    List<Trip> getAllTripByCondition(SearchForm vo);
+    List<Trip> getAllTripByCondition(@Param("vo") SearchForm vo);
 
     /**
      * 通过筛选表单获取分页行程列表

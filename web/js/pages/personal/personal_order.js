@@ -89,14 +89,14 @@ function getOrders(page) {
 										
 										if (item.state.keying == 0) {
 											operaText = '付款';
-											operaUrl = 'myorder.jhtml?type=showPayFor&id='
-													+ item.orderid;
+											operaUrl = '/orders'
+													+ item.orderid+'/confirm';
 										} else if (item.state.keying == 1) {
 											operaText = '退款';
 											operaUrl = '#';
 										} else if (item.state.keying == 3) {
 											operaText = '评价';
-											operaUrl = 'mycomment.jhtml?type=init';
+											operaUrl = '/user/comments';
 										} else {
 											operaText = '';
 											operaUrl = '';

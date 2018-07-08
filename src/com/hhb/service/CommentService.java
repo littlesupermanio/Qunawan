@@ -19,4 +19,6 @@ public interface CommentService {
          * @param basePath
          */
         void initCommentPicture(Set<CommentPicture> pictures, String basePath);
+
+
 }

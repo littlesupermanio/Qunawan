@@ -22,7 +22,7 @@ public class SearchController {
     @Autowired
     private TripService tripService;
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView model(HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();

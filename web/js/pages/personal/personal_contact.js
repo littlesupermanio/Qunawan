@@ -15,10 +15,9 @@ function getContact(page) {
 			.ajax({
 				type : "POST",
 				async : true,
-				url : "mycontact.jhtml",
+				url : "/user/contacts",
 				data : {
 					page : page,
-					type : 'getContacts'
 				},
 				dataType : "json",
 
@@ -73,7 +72,7 @@ function checkAddContact() {
 		$.ajax({
 			type : "POST",
 			async : true,
-			url : "mycontact.jhtml",
+			url : "/user/contacts/save",
 			data : {
 				c_name : $("#cnName").val(),
 				c_email : $("#emails").val(),
@@ -121,7 +120,7 @@ function checkUpdateContact(page) {
 				.ajax({
 					type : "POST",
 					async : true,
-					url : "mycontact.jhtml",
+					url : "/user/contacts/update",
 					data : {
 						page : constant_page,
 						c_id : modifyId,
@@ -154,18 +153,19 @@ function checkUpdateContact(page) {
 
 // 开始删除联系人的ajax请求
 function deleteContact() {
+    console.log(111)
 	$.ajax({
 		type : "POST",
 		async : true,
-		url : "mycontact.jhtml",
+		url : "/user/contacts/del",
 		data : {
 			c_id : deleteId,
-			type : 'deleteContact'
 		},
 		dataType : "text",
 		// 成功返回调用的函数
 		success : function(data) {
-			if (data == "fail") {
+			console.log(111)
+			if (data.success == false) {
 				alert("当前用户在订单中已绑定，暂时不能删除!!!");
 			} else {
 				//getContact(constant_page);

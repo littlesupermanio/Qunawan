@@ -21,10 +21,9 @@ function getWaitCommentOrders(page) {
 			.ajax({
 				type : "POST",
 				async : true,
-				url : "mycomment.jhtml",
+				url : "/user/comments/wait",
 				data : {
 					page : page,
-					type : 'getWaitComments'
 				},
 				dataType : "json",
 
@@ -35,9 +34,10 @@ function getWaitCommentOrders(page) {
 					var finishSize = 0;
 					var html = '';
 					var flag = "true";
+
 					$
 							.each(
-									data,
+									data.data,
 									function(key, value) {
 										pageCount = value.pageCount == 0 ? 1
 												: value.pageCount;
@@ -52,7 +52,7 @@ function getWaitCommentOrders(page) {
 										html += '<div class="comstati clearfix">'
 												+ '<div class="com-null">'
 												+ '<span class="com_count_img"> <img src="'
-												+ getRootPath()
+												// + getRootPath()
 												+ '/image_cache/'
 												+ value.image
 												+ '" />'
@@ -143,7 +143,7 @@ function getWaitCommentOrders(page) {
 
 				},
 				error : function(XMLResponse) {
-					alert(XMLResponse.responseText)
+					console.log(XMLResponse.responseText)
 				}
 			});
 }
@@ -153,7 +153,7 @@ htmls += '<div   class="comappend" style="display: none;  " >';
 htmls += '<div class="JS_closeBox comform combd" style="display: block;">';
 htmls += ' <i  class="iconcom iconcom-boxdir"></i>';
 htmls += '<i class="JS_close iconcom iconcom-close"></i>';
-htmls += '<form id="saveCommentForm" method="POST" controller="mycomment.jhtml?type=submitComment" enctype="multipart/form-data">';
+htmls += '<form id="saveCommentForm" method="POST" action="/user/comments/new" enctype="multipart/form-data">';
 htmls += '<div class="comform_a">';
 htmls += '<div class="comform_a_left">';
 htmls += '<input type="hidden" value="" name="orderid">';
@@ -260,10 +260,9 @@ function getFinishCommentOrders(page) {
 			.ajax({
 				type : "POST",
 				async : true,
-				url : "mycomment.jhtml",
+				url : "/user/comments/finished",
 				data : {
 					page : page,
-					type : 'getFinishComment',
 				},
 				dataType : "json",
 
@@ -275,7 +274,7 @@ function getFinishCommentOrders(page) {
 					var pageCount = 1;
 					$
 							.each(
-									data,
+									data.data,
 									function(key, value) {
 										pageCount = value.pageCount == 0 ? 1
 												: value.pageCount;
@@ -284,11 +283,11 @@ function getFinishCommentOrders(page) {
 										$.each(value.imgs,
 												function(index, item) {
 													imgsHtml += '<li><a href="'
-															+ getRootPath()
+															// + getRootPath()
 															+ '/image_cache/'
 															+ item
 															+ '"><img src="'
-															+ getRootPath()
+															// + getRootPath()
 															+ '/image_cache/'
 															+ item
 															+ '" /></a></li>';

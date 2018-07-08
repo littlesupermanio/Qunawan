@@ -11,7 +11,7 @@
 <head>
 	<title>${s_bean.search_key}旅游_${s_bean.search_key}旅游报价_路线推荐-去哪玩</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="<%=basePath%>css/main.css" />
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -320,7 +320,7 @@
 						<li>
 							<div>
 								
-								<form id="searchForm" action="<%=response.encodeURL("search.jhtml")%>" method="post">
+								<form id="searchForm" action="<%=response.encodeURL("search")%>" method="post">
 								
 									<input type="hidden" name="triptype" id="triptype" value="${s_bean.type_name }"/>
 									<input type="hidden" name="place" id="place" value="${s_bean.place_name }"/>
@@ -366,7 +366,7 @@
 				<c:forEach items="${t_list }" var="trip" varStatus="n">
 					<div class="recommend">
 						<div class="detail"> 
-							<a class="detail_img" href="tripDetail.jhtml?id=${trip.id}&type=init">
+							<a class="detail_img" href="/trip/${trip.id}">
 								<img src="image_cache/${trip.main_picname }" width="195" height="130" />
 								<c:if test="${fn:trim(trip.type.value) == '自驾游' }">
 									<span class="detail_tag detail_tag_blue">自驾游</span>
@@ -392,7 +392,7 @@
 								<div class="detail_list">
 									<p class="detail_title">
 										<span class="title_left">${trip.start.name }出发 |</span>
-										<a href="tripDetail.jhtml?id=${trip.id}&type=init">
+										<a href="/trip/${trip.id}">
 											${fn:trim(trip.title) }
 										</a>
 									</p>	

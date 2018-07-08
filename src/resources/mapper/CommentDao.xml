@@ -20,10 +20,26 @@
                 javaType="User"
                 select="com.hhb.dao.UserDao.getUserById" />
 
+        <association
+                property="orders"
+                column="orders"
+                javaType="Orders"
+                select="com.hhb.dao.OrdersDao.getOrderById" />
+
+
         <collection property="pictures" ofType="CommentPicture" select="com.hhb.dao.CommentPicDao.getCommentPics" column="id" />
     </resultMap>
 
     <resultMap id="commentCount" type="int">
+        <result property="count" column="ct"/>
+    </resultMap>
+
+    <resultMap id="avgScore" type="float">
+        <result property="average" column="average"/>
+    </resultMap>
+
+    <resultMap id="avgCount" type="float">
+        <result property="average" column="average"/>
         <result property="count" column="ct"/>
     </resultMap>
 
@@ -34,6 +50,32 @@
     <select id="getCommentsByTripId" parameterType="int" resultMap="CommentResult">
         select c.id,c.trip,c.place,c.hotel,c.service,c.traffic,c.content,c.time,c.usefull,c.useless,u.name,u.id uid
 		from comment c,user u  where c.user=u.id and c.trip = #{tripId} order by c.time desc
+    </select>
+
+    <select id="getCommentedCountByUser" parameterType="int" resultMap="commentCount">
+       select count(*) ct from comment where user= #{userId}
+    </select>
+
+    <select id="getCommentsPerPage" resultMap="CommentResult">
+        select com.id,o.id as orders,o.orderNo,com.content,com.time,com.hotel,com.place,
+        com.service,com.traffic,com.usefull,com.useless,t.title
+        from comment com left outer join orders o on com.orders=o.id
+        left outer join trip t on com.trip=t.id
+        where o.user= #{userId} and o.state= #{sq_id}  order by com.time desc
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getCommentedCountByTrip" resultMap="commentCount">
+        select count(*) ct from comment where trip= #{tripId}
+    </select>
+
+    <select id="getAvg_Score" resultMap="avgScore">
+        select avg(c.${typeName}) average from comment c where c.trip= #{tripId}
+    </select>
+
+    <select id="getCountByAvg" resultMap="avgCount">
+       select (c.place+c.hotel+c.service+c.traffic)/4 average, COUNT(*)  ct from Comment c
+	   where c.trip = #{tripId} group by (c.place+c.hotel+c.service+c.traffic)/4
     </select>
 
 </mapper>

@@ -50,7 +50,8 @@ public class OrdersServiceImpl implements OrdersService {
     }
     @Override
     public Contact getContactByOrderId(int orderId) {
-        return null;
+        List<OrderContact> orderContacts = orderContactDao.getOrderContacts(orderId, Constants.CONTACT_FOR_URGENT);
+        return orderContacts.get(0).getContact();
     }
 
     @Override
@@ -65,8 +66,7 @@ public class OrdersServiceImpl implements OrdersService {
         /**
          *  1、保存订单
          */
-        int oid = ordersDao.saveOrder(order);
-        order.setId(oid);
+        ordersDao.saveOrder(order);
 
         /**
          *  2、保存紧急联系人

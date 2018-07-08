@@ -15,22 +15,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>个人空间-我的点评</title>
 	<link type="text/css" rel="stylesheet"
-		href="css/personalCss.css" />
+		href="<%=basePath%>css/personalCss.css" />
 	<link rel="stylesheet"
-		href="css/jquery.Jcrop.min.css">
+		href="<%=basePath%>css/jquery.Jcrop.min.css">
 	<link rel="stylesheet" type="text/css"
-		href="css/img_account.css">
+		href="<%=basePath%>css/img_account.css">
 	<link rel="stylesheet"
-		href="css/DB_gallery.css" />
+		href="<%=basePath%>css/DB_gallery.css" />
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="<%=basePath%>js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap/bootstrap.min.js"></script>
+		src="<%=basePath%>js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/jquery.Jcrop.min.js"></script>
+		src="<%=basePath%>js/pages/personal/frame/jquery.Jcrop.min.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/birthday.js"></script>
-	<script src="js/common.js"
+		src="<%=basePath%>js/pages/personal/frame/birthday.js"></script>
+	<script src="<%=basePath%>js/common.js"
 		type="text/javascript"></script>
 	<script type="text/javascript">
 		var jcrop_api, boundx, boundy, $preview, $pcnt, pimg;
@@ -45,26 +45,26 @@
 	</script>
 	
 	<script type="text/javascript"
-		src="js/pages/personal/personal_information.js"></script>
+		src="<%=basePath%>/js/pages/personal/personal_information.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/personal_comment.js"></script>
+		src="<%=basePath%>/js/pages/personal/personal_comment.js"></script>
 	<script type="text/javascript"
-		src="js/pages/personal/frame/jquery.DB_gallery.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/jquery.DB_gallery.js"></script>
 	<!-- 星星等级插件 -->
 	<script
-		src="js/pages/personal/frame/jquery.barrating.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/jquery.barrating.js"></script>
 	<script
-		src="js/pages/personal/frame/examples.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/examples.js"></script>
 	<!-- 待评论上传图片 -->
 	<!-- 引用核心层插件 -->
 	<script type="text/javascript"
-		src="js/pages/personal/frame/zyFile.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/zyFile.js"></script>
 	<!-- 引用控制层插件 -->
 	<script type="text/javascript"
-		src="js/pages/personal/frame/zyUpload.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/zyUpload.js"></script>
 	<!-- 引用初始化JS -->
 	<script type="text/javascript"
-		src="js/pages/personal/frame/upFile.js"></script>
+		src="<%=basePath%>/js/pages/personal/frame/upFile.js"></script>
 	<!-- 待评论上传图片 -->
 	<base href="<%=basePath%>" />
 </head>

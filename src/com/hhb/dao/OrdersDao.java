@@ -39,6 +39,14 @@ public interface OrdersDao {
          * @param sq 状态对象
          * @return 订单集合数量
          */
+        int getOrdersByUser(@Param("userId") Integer userId, @Param("sq") Sequence sq);
+
+        /**
+         * 获取某用户特有状态的订单数量
+         * @param userId 用户id
+         * @param sq 状态对象
+         * @return 订单集合数量
+         */
         int getOrdersCountByUserWithSequence(Integer userId, Sequence sq);
 
         /**

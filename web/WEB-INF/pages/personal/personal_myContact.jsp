@@ -218,7 +218,7 @@
 				</div>
 				<div class="Pages"> <!-- id="contactPages" -->
 					<c:if test="${cur!=1 }">
-						<a href="mycontact.jhtml?type=getContacts&page=${cur-1}" title="上一页" class="PrevPage">上一页</a>
+						<a href="/user/contacts?page=${cur-1}" title="上一页" class="PrevPage">上一页</a>
 					</c:if>
 					<c:if test="${cur==1 }">
 						<a href="javascript:;" title="首页" class="PrevPage">首页</a>
@@ -226,16 +226,16 @@
 
 					<c:forEach var="i" begin="1" end="${pageCount}">
 						<c:if test="${i==cur}">
-								<a href="mycontact.jhtml?type=getContactst&page=${i}" class="pagesel" style="background-color:#DF1A7A;
+								<a href="/user/contacts?page=${i}" class="pagesel" style="background-color:#DF1A7A;
 							color:white" id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 						<c:if test="${i!=cur}">
-								<a href="mycontact.jhtml?type=getContacts&page=${i}" class="pagesel"
+								<a href="/user/contacts?page=${i}" class="pagesel"
 							 id="orderPage" onclick="cur(${i})">${i}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${cur!=pageCount }">
-						<a href="mycontact.jhtml?type=getContacts&page=${cur+1}" title="下一页" class="NextPage" onclick="next()">下一页</a>
+						<a href="/user/contacts?page=${cur+1}" title="下一页" class="NextPage" onclick="next()">下一页</a>
 					</c:if>
 					<c:if test="${cur==pageCount }">
 						<a href="javascript:;" title="尾页" class="NextPage" onclick="next()">尾页</a>

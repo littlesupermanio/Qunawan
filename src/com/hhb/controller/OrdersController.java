@@ -2,11 +2,9 @@ package com.hhb.controller;
 
 import com.hhb.dao.ContactDao;
 import com.hhb.dao.OrdersDao;
+import com.hhb.dao.SequenceDao;
 import com.hhb.dao.TripDao;
-import com.hhb.entity.Contact;
-import com.hhb.entity.Orders;
-import com.hhb.entity.Trip;
-import com.hhb.entity.User;
+import com.hhb.entity.*;
 import com.hhb.form.OrderDetailForm;
 import com.hhb.form.OrderForm;
 import com.hhb.form.PutOrderForm;
@@ -42,6 +40,8 @@ public class OrdersController {
     @Autowired
     private ContactDao contactDao;
     @Autowired
+    private SequenceDao sequenceDao;
+    @Autowired
     private OrdersService ordersService;
 
 
@@ -71,6 +71,24 @@ public class OrdersController {
         request.getSession().setAttribute("orderDetailForm", orderDetailForm);
 
         mv.setViewName("order_detail");
+        return mv;
+    }
+
+    @RequestMapping(value = "/{orderId}/pay", method = RequestMethod.GET)
+    public ModelAndView payOrder(@PathVariable("orderId") int order_id, HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+
+        Orders order = ordersDao.getOrderById(order_id);
+        Sequence sq = sequenceDao.getSeqByKeyAndType(Constants.WAIT_COMMENT_ORDER_STATE, Constants.ORDER_TYPE);
+        order.setState(sq);
+
+        ordersDao.updateOrderState(sq, order_id);
+
+        // 对页面输出信息
+        PutOrderForm pof = new PutOrderForm(order);
+        mv.addObject("vo", pof);
+
+        mv.setViewName("order_success");
         return mv;
     }
 

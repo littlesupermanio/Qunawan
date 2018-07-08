@@ -51,4 +51,20 @@
         INSERT INTO Contact(user,name,phone,sex,email,cardno,birthday)
         VALUES(#{user.id},#{name},#{phone},#{sex},#{email},#{cardno},#{birthday})
     </insert>
+
+    <update id="updateContact" parameterType="com.hhb.entity.Contact">
+        UPDATE Contact SET
+		  user= #{user.id},
+		  name= #{name},
+		  phone= #{phone},
+		  sex= #{sex},
+		  email= #{email},
+		  cardno= #{cardno},
+		  birthday= #{birthday}
+		  WHERE id= #{id}
+    </update>
+
+    <delete id="delete">
+        delete from contact where id= #{contactId}
+    </delete>
 </mapper>

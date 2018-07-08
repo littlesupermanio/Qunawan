@@ -42,7 +42,7 @@
         where id = #{id}
     </update>
 
-    <insert id="insert" parameterType="com.hhb.entity.User">
+    <insert id="save" parameterType="com.hhb.entity.User">
         INSERT INTO User(phone,email,password) VALUES(#{phone},#{email},#{password})
     </insert>
 

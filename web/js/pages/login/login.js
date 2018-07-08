@@ -131,9 +131,9 @@ function register(formName) {
 		var start = url.lastIndexOf("/");
 		var end = url.indexOf(";");
 		if(end == -1)
-			var newurl = url.replace(url.substring(start),"/register.jhtml");
+			var newurl = url.replace(url.substring(start),"/register");
 		else
-			var newurl = url.replace(url.substring(start,end),"/register.jhtml");
+			var newurl = url.replace(url.substring(start,end),"/register");
 		$("#log_reg_form").attr("action", newurl);
 		window.document.forms[formName].submit();
 	}

@@ -18,11 +18,11 @@
 	<title>订单确认-去哪玩旅游网</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet"
-		href="css/common.css">
+		href="<%=basePath%>css/common.css">
 	<link rel="stylesheet" 
-		href="css/order.css">
+		href="<%=basePath%>css/order.css">
 	<script type="text/javascript"
-		src="js/jquery/jquery-1.11.0.min.js"></script>
+		src="<%=basePath%>js/jquery/jquery-1.11.0.min.js"></script>
 	<base href="<%=basePath%>" />
 </head>
 <body>
@@ -72,7 +72,7 @@
 					<div class="dot_line"></div>
 					<div class="order_end">
 						<div class="returnIndex"></div>
-						<span><a href="myorder.jhtml?type=initOrderDetail&order_id=${vo.id }">查看订单详情 >></a></span>
+						<span><a href="/orders/${vo.id }/detail">查看订单详情 >></a></span>
 					</div>
 				</div>
 			</div>

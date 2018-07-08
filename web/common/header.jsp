@@ -129,7 +129,7 @@
 					
 						<!-- 实训场景013：活跃时长统计（二） - action的url重写【START】 -->
 						<form class="form_search" id="headSearchForm"
-							action="${pageContext.request.contextPath}/<%=response.encodeURL("search.jhtml")%>" method="post">
+							action="${pageContext.request.contextPath}/<%=response.encodeURL("search")%>" method="post">
 						<!-- 实训场景013：活跃时长统计（二） - action的url重写【END】 -->
 						
 							<input type="text" id="head_search" name="search_key"

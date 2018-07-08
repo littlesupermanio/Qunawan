@@ -35,12 +35,13 @@
         <result property="count" column="ct"/>
     </resultMap>
 
-    <select id="getOrderWithSequenceId"  resultMap="OrdersResult">
+    <select id="getOrdersWithSequenceId"  resultMap="OrdersResult">
         <!-- 具体的sql -->
         SELECT * FROM Orders o
         LEFT JOIN User u ON o.user = u.id
         LEFT JOIN Trip t ON o.trip = t.id
         WHERE o.user =  #{userId}  AND o.state = #{sequenceId}
+        limit #{offset},#{limit}
     </select>
 
     <select id="getOrderById"  parameterType="int" resultMap="OrdersResult">
@@ -57,13 +58,17 @@
 		ORDER BY o.create_time desc limit #{offset},#{limit}
     </select>
 
+    <select id="getOrdersByUser" resultMap="ordersCount">
+		SELECT count(*) ct FROM Orders WHERE user =  #{userId}  AND state = #{sq.id}
+    </select>
+
+
     <!-- 插入订单 -->
-    <insert id="saveOrder" parameterType="com.hhb.entity.Orders">
+    <insert id="saveOrder" parameterType="com.hhb.entity.Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Orders(orderNo,trip,user,num,start_time,create_time,go_point,go_time,total_price,state)
         VALUES(#{orderNo},#{trip.id},#{user.id},#{num},#{start_time},#{create_time},#{go_point},#{go_time},#{total_price},#{state.id})
     </insert>
 
-    <!-- 更新学生信息 -->
     <update id="updateOrderState">
         update orders set
         state = #{state.id}
